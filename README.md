@@ -74,6 +74,8 @@ pass_generator/
 - Internet connection required for initial NLTK data download
 - No additional system dependencies required
 
+## ☑️ Testing
+The `main.py` script also includes test cases for each password generator. The script will print out a test password for each generator and run checks to make sure the password matches the expected format.
 
 ## 🔗 Links
 
