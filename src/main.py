@@ -1,6 +1,7 @@
 import random
 import string
 from abc import ABC, abstractmethod
+from typing import List, Optional
 
 import nltk
 
@@ -44,7 +45,7 @@ class MemorablePasswordGenerator (PasswordGenerator):
     """ Generate memorable password. The password is a combination of words. Words are separated by a separator and can be capitalized.
     """
 
-    def __init__(self, num_words: int = 4, separator: str = '-', is_capitalize: bool = False, vocabulary: list[str] = None):
+    def __init__(self, num_words: int = 4, separator: str = '-', is_capitalize: bool = False, vocabulary: Optional[List[str]] = None):
         """
         :param num_words: number of words in the password, defaults to 4
         :param separator: separator between words, defaults to '-'
@@ -79,6 +80,39 @@ class PinCodeGenerator (PasswordGenerator):
         return ''.join(pin)
 
 
+def test_random_password_generator():
+    generator = RandomPasswordGenerator(length=10, include_symbols=True, include_numbers=True)
+    password = generator.generate()
+    print(password)
+    assert len(password) == 10
+    assert any(char in string.punctuation for char in password)
+    assert any(char in string.digits for char in password)
+
+
+def test_memorable_password_generator():
+    generator = MemorablePasswordGenerator(num_words=5, separator='-', is_capitalize=True, vocabulary=nltk.corpus.words.words())
+    password = generator.generate()
+    print(password)
+    assert len(password.split('-')) == 5
+    assert any(word.upper() == word for word in password.split('-'))
+
+
+def test_pin_code_generator():
+    generator = PinCodeGenerator(length=8)
+    pin = generator.generate()
+    print(pin)
+    assert len(pin) == 8
+    assert all(char in string.digits for char in pin)
+
+
+def main():
+    print('Testing RandomPasswordGenerator:')
+    test_random_password_generator()
+    print('Testing MemorablePasswordGenerator:')
+    test_memorable_password_generator()
+    print('Testing PinCodeGenerator:')
+    test_pin_code_generator()
+
+
 if __name__ == '__main__':
-    p_obj = RandomPasswordGenerator(length=10, include_symbols=True, include_numbers=True)
-    print(p_obj.generate())
+    main()
