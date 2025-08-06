@@ -1,7 +1,7 @@
 # Password Generator
 
 <p align="left">
-<img src="assets/banner.png" alt="Password Generator" style="border-radius: 10px;" width=350>
+<img src="assets/banner.jpeg" alt="Password Generator" style="border-radius: 10px;" width=80%>
 </p>
 
 A simple password generator application written in Python that supports multiple password generation strategies. Whether you need a random password with symbols and numbers, a memorable passphrase using real words, or a simple PIN code, this tool has you covered.
